@@ -59,9 +59,10 @@ password = "你的密码"
 service = "校园联通/电信/移动"  # 或 "校园无线"
 
 [api]
-base_url  = "http://210.27.177.172"
-login_url = "http://210.27.177.172/eportal/InterFace.do?method=login"
-test_url  = "https://www.baidu.com"
+base_url   = "http://210.27.177.172"
+login_url  = "http://210.27.177.172/eportal/InterFace.do?method=login"
+test_url   = "https://www.baidu.com"
+trigger_url = "http://www.baidu.com"  # 配置的 Portal 失效时，用它被劫持的跳转自动探测真实 Portal
 
 [time]
 poll_interval  = "1h0m0s"  # 网络状态检测间隔
@@ -260,7 +261,7 @@ install-startup.cmd
 ./autologin -install
 ```
 
-### Go 版卸载服务
+`-install` 会把 `-config` 的路径写进服务启动参数（自动转为绝对路径），卸载：
 
 ```bash
 ./autologin -uninstall
