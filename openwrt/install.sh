@@ -3,8 +3,8 @@
 # Run ON the router, from the directory that holds autologin.sh,
 # autologin.conf and autologin.initd:
 #
-#   scp -O -r openwrt/ root@192.168.2.1:/tmp/
-#   ssh -o HostKeyAlgorithms=+ssh-rsa root@192.168.2.1
+#   scp -O -r openwrt/ root@<路由器IP>:/tmp/
+#   ssh -o HostKeyAlgorithms=+ssh-rsa root@<路由器IP>
 #   sh /tmp/openwrt/install.sh
 set -eu
 

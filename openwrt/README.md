@@ -148,10 +148,10 @@ ubus call service list | grep -A4 autologin   # 运行状态
 
 ```sh
 # 电脑上（scp 必须加 -O，见踩坑第 4 条）
-scp -O -r openwrt/ root@192.168.2.1:/tmp/
+scp -O -r openwrt/ root@<路由器IP>:/tmp/
 
 # 路由器上（老 dropbear 可能要求 HostKeyAlgorithms，见踩坑第 1 条）
-ssh -o HostKeyAlgorithms=+ssh-rsa root@192.168.2.1
+ssh -o HostKeyAlgorithms=+ssh-rsa root@<路由器IP>
 sh /tmp/openwrt/install.sh
 ```
 
@@ -216,8 +216,8 @@ Network still unreachable. Retrying in 60 seconds...
    `no matching host key type found. Their offer: ssh-rsa`。
    解决：`ssh -o HostKeyAlgorithms=+ssh-rsa`，或写入 `~/.ssh/config`：
    ```
-   Host router 192.168.2.1
-       HostName 192.168.2.1
+   Host router <路由器IP>
+       HostName <路由器IP>
        User root
        HostKeyAlgorithms +ssh-rsa
        PubkeyAcceptedAlgorithms +ssh-rsa,ssh-ed25519

@@ -226,8 +226,8 @@ OpenWrt 等路由器固件没有 bash、没有 systemd（只有 busybox ash + pr
 快速部署：
 
 ```sh
-scp -O -r openwrt/ root@192.168.2.1:/tmp/
-ssh -o HostKeyAlgorithms=+ssh-rsa root@192.168.2.1
+scp -O -r openwrt/ root@<路由器IP>:/tmp/
+ssh -o HostKeyAlgorithms=+ssh-rsa root@<路由器IP>
 sh /tmp/openwrt/install.sh
 ```
 
