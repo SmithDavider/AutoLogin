@@ -38,6 +38,7 @@
 ├─ autologin.sh      # Linux 脚本版
 ├─ autologin.cmd     # Windows 批处理版
 ├─ config.script.example # 脚本版配置示例
+├─ openwrt           # OpenWrt / busybox 路由器版（ash 移植 + procd 服务）
 ├─ build.sh          # Go 版 Linux / macOS 构建脚本
 ├─ build.bat         # Go 版 Windows 构建脚本
 └─ README.md
@@ -210,6 +211,23 @@ sudo ./install-service.sh -c /path/to/autologin.conf
 ```bash
 systemctl status autologin.service
 journalctl -u autologin.service -f
+```
+
+##  OpenWrt / busybox 路由器版
+
+OpenWrt 等路由器固件没有 bash、没有 systemd（只有 busybox ash + procd），根目录的 bash 脚本无法直接运行。[`openwrt/`](openwrt/) 目录提供移植版：
+
+- `openwrt/autologin.sh`：busybox ash 兼容版（POSIX sh 重写，登录逻辑与 bash 版一致）
+- `openwrt/autologin.initd`：procd 服务（开机自启 + 崩溃自动拉起）
+- `openwrt/install.sh`：路由器上的一键安装
+- [`openwrt/README.md`](openwrt/README.md)：**移植方法**（bash → ash 方言差异逐项清单、urlencode 逐字节循环、procd 配置）、部署与验证步骤、老 dropbear / scp / 密钥兼容等踩坑记录
+
+快速部署：
+
+```sh
+scp -O -r openwrt/ root@192.168.2.1:/tmp/
+ssh -o HostKeyAlgorithms=+ssh-rsa root@192.168.2.1
+sh /tmp/openwrt/install.sh
 ```
 
 ##  Windows 脚本版开机自启
